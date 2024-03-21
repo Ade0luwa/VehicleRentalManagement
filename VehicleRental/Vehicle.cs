@@ -25,7 +25,7 @@ namespace VehicleRental
         }
 
         // Method to display the vehicle's details
-        public void DisplayDetails()
+        public virtual void DisplayDetails()
         {
             Console.WriteLine("The vehicle details are:\n");
             Console.WriteLine($"Model: {Model}");
