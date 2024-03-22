@@ -31,7 +31,7 @@ namespace VehicleRental
             Console.WriteLine($"Model: {Model}");
             Console.WriteLine($"Manufacturer: {Manufacturer}");
             Console.WriteLine($"Year: {Year}");
-            Console.WriteLine($"Rental Price: {RentalPrice:C}");
+            Console.WriteLine($"Rental Price: {RentalPrice:C}\n");
         }
     }
 }

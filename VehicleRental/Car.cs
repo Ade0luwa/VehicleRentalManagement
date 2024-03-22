@@ -28,11 +28,11 @@ namespace VehicleRental
             base.DisplayDetails(); // This displays the common vehicle properties
 
             // This displays the car specific properties
-            Console.WriteLine("The car specific details are:\n");
+            Console.WriteLine("The car specific details are:");
             Console.WriteLine($"Seats: {Seats}");
             Console.WriteLine($"Engine Type: {EngineType}");
             Console.WriteLine($"Transmission: {Transmission}");
-            Console.WriteLine($"Convertible: {(Convertible ? "Yes" : "No")}");
+            Console.WriteLine($"Convertible: {(Convertible ? "Yes" : "No")}\n");
         }
 
 

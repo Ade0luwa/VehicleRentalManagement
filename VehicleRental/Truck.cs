@@ -26,10 +26,10 @@ namespace VehicleRental
             base.DisplayDetails(); // This displays the common vehicle properties
 
             // This displays the truck specific properties
-            Console.WriteLine("The truck specific details are:\n");
+            Console.WriteLine("The truck specific details are:");
             Console.WriteLine($"Truck Capacity: {Capacity}");
             Console.WriteLine($"Type of truck: {TruckType}");
-            Console.WriteLine($"Four wheel drive: {(FourWheelDrive ? "Yes" : "No")}");
+            Console.WriteLine($"Four wheel drive: {(FourWheelDrive ? "Yes" : "No")}\n");
         }
     }
 }

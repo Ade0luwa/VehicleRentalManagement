@@ -26,10 +26,10 @@ namespace VehicleRental
             base.DisplayDetails(); // This displays the common vehicle properties
 
             // This displays the motorcycle specific properties
-            Console.WriteLine("The motorcycle specific details are:\n");
+            Console.WriteLine("The motorcycle specific details are:");
             Console.WriteLine($"Motorcycle engine capacity: {EngineCapacity}");
             Console.WriteLine($"Type of fuel: {FuelType}");
-            Console.WriteLine($"Has Fairing: {(HasFairing ? "Yes" : "No")}");
+            Console.WriteLine($"Has Fairing: {(HasFairing ? "Yes" : "No")}\n");
         }
     }
 }
