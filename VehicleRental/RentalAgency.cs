@@ -11,7 +11,7 @@ namespace VehicleRental
         private Vehicle[] Fleet { get; set; }
         public double TotalRevenue { get; private set; }
 
-        
+
         public RentalAgency(int inventorySize)
         {
             Fleet = new Vehicle[inventorySize];
@@ -142,7 +142,7 @@ namespace VehicleRental
 
             // Parse the convertibleInput to bool
             bool.TryParse(convertibleInput, out carConvertible);
-
+            Console.WriteLine($"\nCongratulations!!! You have successfully added {carModel} to your fleet\n");
             return new Car(carModel, carManufacturer, carYear, carRentalPrice, carSeats, carEngineType, carTransmission, carConvertible);
         }
 
@@ -196,7 +196,7 @@ namespace VehicleRental
                 Console.Write("Four-Wheel Drive (true/false): ");
                 bool.TryParse(Console.ReadLine(), out truckFourWheelDrive);
             }
-
+            Console.WriteLine($"\nCongratulations!!! You have successfully added {truckModel} to your fleet\n");
             return new Truck(truckModel, truckManufacturer, truckYear, truckRentalPrice, truckCapacity, truckType, truckFourWheelDrive);
         }
 
@@ -250,41 +250,65 @@ namespace VehicleRental
                 Console.Write("Has Fairing (true/false): ");
                 bool.TryParse(Console.ReadLine(), out bikeHasFairing);
             }
-
+            Console.WriteLine($"\nCongratulations!!! You have successfully added {bikeModel} to your fleet\n");
             return new Motorcycle(bikeModel, bikeManufacturer, bikeYear, bikeRentalPrice, bikeEngineCapacity, bikeFuelType, bikeHasFairing);
         }
 
 
         // Method to remove vehicle from fleet
-        public void RemoveVehicleFromInventory(int index)
+        public void RemoveVehicleFromInventory()
         {
-            
+            // User is asked to enter the index of the vehicle to remove
+            Console.Write("Enter the index of the vehicle to remove: ");
+            int indexToRemove = int.Parse(Console.ReadLine());
+
+            // Checks to confirm if the index entered is valid
+            if (indexToRemove < 0 || indexToRemove >= Fleet.Length || Fleet[indexToRemove] == null)
+            {
+                Console.WriteLine("There is no vehicle found at the selected index. Try again!!\n");
+                return;
+            }
+
+            // Remove the vehicle from the fleet
+            Fleet[indexToRemove] = null;
+
+            // Shift vehicles in the fleet array to fill the gap
+            for (int i = indexToRemove; i < Fleet.Length - 1; i++)
+            {
+                Fleet[i] = Fleet[i + 1];
+            }
+            // Clear the last slot in the array
+            Fleet[Fleet.Length - 1] = null;
+
+            Console.WriteLine("\nVehicle has been removed from inventory.\n");
         }
+
 
         // Method to rent vehicle
         public void RentVehicle(int index, int days)
         {
-            
+
         }
 
         // Method to display all items in the inventory
         public void DisplayInventory()
         {
-            bool isEmpty = true;
+            
             for (int i = 0; i < Fleet.Length; i++)
             {
-                if (Fleet[i] != null)
+                if (Fleet[i] == null)
                 {
-                    Console.WriteLine("Current items in the inventory:");
+                    Console.WriteLine($"No vehicles in slot {i + 1}.");
+                }
+                else if (Fleet[i] != null)
+                {
                     Console.WriteLine($"Vehicle {i + 1}:");
                     Fleet[i].DisplayDetails();
                     Console.WriteLine();
                 }
+
             }
-            if (isEmpty)
-            {
-                Console.WriteLine("Fleet is empty. Please add some vehicles");
-            }
+            
         }
 
     }

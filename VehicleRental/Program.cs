@@ -35,6 +35,7 @@ class Program
                     break;
 
                 case 3:
+                    agency.RemoveVehicleFromInventory();
                     break;
 
                 case 4:
