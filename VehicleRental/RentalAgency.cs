@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace VehicleRental
 {
@@ -11,11 +12,9 @@ namespace VehicleRental
         private Vehicle[] Fleet { get; set; }
         public double TotalRevenue { get; private set; }
 
-
         public RentalAgency(int inventorySize)
         {
             Fleet = new Vehicle[inventorySize];
-            Console.WriteLine($"You have {inventorySize} slots available ");
         }
 
         // Method to add vehicle to vehicleQuantity
@@ -285,20 +284,68 @@ namespace VehicleRental
 
 
         // Method to rent vehicle
-        public void RentVehicle(int index, int days)
+        public void RentVehicle()
         {
+            // Prompt user to enter the index of the vehicle to be rented
+            Console.Write("Enter the index of the vehicle to be rented: ");
+            int index = int.Parse(Console.ReadLine());
 
+            // Checks to confirm if the index entered is valid
+            if (index < 0 || index >= Fleet.Length || Fleet[index] == null)
+            {
+                Console.WriteLine("There is no vehicle found at the selected index. Try again!!\n");
+                return;
+            }
+
+            // Display details of the selected vehicle
+            Fleet[index].DisplayDetails();
+
+            // Prompts user to enter the duration of the rental in months
+            Console.Write("\nEnter the duration of the rental (in months): ");
+            int months = int.Parse(Console.ReadLine());
+
+            // Calculate rental cost
+            double rentalCost = Fleet[index].RentalPrice * months;
+
+            // Display rental cost to the user
+            Console.WriteLine($"\nRental cost for {months} months: ${rentalCost}");
+
+            // Ask user for confirmation
+            Console.Write("\nDo you want to proceed with the rental? (yes/No): ");
+            string confirmation = Console.ReadLine().ToLower();
+
+            // If user confirms, proceed with the rental
+            if (confirmation == "yes")
+            {
+                // Update total revenue
+                TotalRevenue += rentalCost;
+                // Remove the rented vehicle from the fleet
+                Fleet[index] = null;
+                Console.WriteLine($"\nCongratulations you have successfully rented the vehicle for {months} months");
+                GetTotalRevenue();
+            }
+            else
+            {
+                Console.WriteLine("Rental process cancelled.");
+            }
+        }
+
+        //Method to display the total revenue earned
+        public void GetTotalRevenue()
+        {
+            Console.WriteLine($"Total Revenue from rental: ${TotalRevenue}");
         }
 
         // Method to display all items in the inventory
         public void DisplayInventory()
         {
-            
+            Console.WriteLine($"Your fleet has {Fleet.Length} slots.\n ");
+
             for (int i = 0; i < Fleet.Length; i++)
             {
                 if (Fleet[i] == null)
                 {
-                    Console.WriteLine($"No vehicles in slot {i + 1}.");
+                    Console.WriteLine($"No vehicles currently in slot {i + 1}.");
                 }
                 else if (Fleet[i] != null)
                 {
@@ -308,7 +355,7 @@ namespace VehicleRental
                 }
 
             }
-            
+
         }
 
     }
