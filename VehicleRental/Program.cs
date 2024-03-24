@@ -48,7 +48,7 @@ class Program
                     break;
 
                 case 6:
-                    Console.WriteLine($"Thank you for using {applicationName}. Hope to see you soon");
+                    Console.WriteLine($"Thank you for using {applicationName}. We hope you were pleased with our services");
                     Environment.Exit(0);
                     break;
 
